@@ -3,12 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     UserModule,
     MongooseModule.forRoot(
-      'mongodb+srv://sploot-space-test:IOCIpvTpD7bhLy5K@cluster0.yxltt.mongodb.net/nest-learn?retryWrites=true&w=majority',
+      process.env.MONGODB_URI,
     ), //connecting db to root module
   ],
   controllers: [AppController],
